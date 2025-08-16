@@ -1,0 +1,432 @@
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	font-family: 'Fredoka', sans-serif;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #fce7f3 0%, #faf5ff 50%, #dbeafe 100%);
+	position: relative;
+	overflow-x: hidden;
+
+	color: #3c3eb499;
+	margin: 0;
+	padding: 8px;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Botão de Navegação */
+.nav-button {
+	display: inline-block;
+	padding: 12px 24px;
+	font-size: 1.125rem;
+	font-weight: 700;
+	border-radius: 16px;
+	border: 3px solid #93c5fd;
+	background: transparent;
+	color: #2563eb;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.2s;
+	margin-top: 32px;
+}
+.nav-button:hover {
+	background: #dbeafe;
+	border-color: #60a5fa;
+}
+
+/* Padrão de Fundo */
+.bg-pattern {
+	position: absolute;
+	inset: 0;
+	opacity: 0.1;
+	pointer-events: none;
+}
+.bg-shape {
+	position: absolute;
+	border-radius: 50%;
+}
+.bg-shape.square {
+	border-radius: 8px;
+}
+.bg-shape-1 { top: 40px; left: 40px; width: 128px; height: 128px; background: #fde047; }
+.bg-shape-2 { top: 128px; right: 80px; width: 96px; height: 96px; background: #86efac; transform: rotate(45deg); }
+.bg-shape-3 { bottom: 80px; left: 80px; width: 112px; height: 112px; background: #fdba74; }
+.bg-shape-4 { bottom: 128px; right: 128px; width: 80px; height: 80px; background: #c084fc; transform: rotate(12deg); }
+.bg-shape-5 { top: 50%; left: 25%; width: 64px; height: 64px; background: #93c5fd; }
+.bg-shape-6 { top: 33%; right: 33%; width: 48px; height: 48px; background: #fca5a5; transform: rotate(45deg); }
+
+/* ===== Página Home ===== */
+/* Padrão de Grade de Caça-Palavras */
+.word-grid {
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translateX(-50%);
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	gap: 4px;
+	opacity: 0.3;
+}
+.grid-cell {
+	width: 16px;
+	height: 16px;
+	background: #d1d5db;
+	border-radius: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	font-weight: bold;
+	color: #6b7280;
+}
+
+/* Conteúdo Principal */
+.container {
+	position: relative;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Logo e Títulos */
+.logo {
+	text-align: center;
+	margin-bottom: 48px;
+}
+.logo h1 {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 4rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	margin-bottom: 16px;
+	background: linear-gradient(90deg, #9333ea, #ec4899, #f97316);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+.logo h1:last-of-type {
+	background: linear-gradient(90deg, #2563eb, #059669, #eab308);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+	margin-bottom: 24px;
+}
+.logo-subtitle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #374151;
+}
+
+/* Controles do Jogo */
+.game-controls {
+	background: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(8px);
+	border-radius: 24px;
+	padding: 32px;
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+	border: 4px solid #e9d5ff;
+	max-width: 400px;
+	width: 100%;
+}
+.difficulty-section {
+	margin-bottom: 32px;
+}
+.difficulty-label {
+	display: block;
+	font-size: 1.125rem;
+	font-weight: 700;
+	color: #374151;
+	margin-bottom: 12px;
+	text-align: center;
+}
+.select-wrapper {
+	position: relative;
+}
+.select {
+	width: 100%;
+	height: 56px;
+	font-size: 1.125rem;
+	font-weight: 600;
+	border-radius: 16px;
+	border: 3px solid #c4b5fd;
+	background: linear-gradient(90deg, #faf5ff, #fdf2f8);
+	padding: 0 16px;
+	appearance: none;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+.select:hover {
+	background: linear-gradient(90deg, #f3e8ff, #fce7f3);
+}
+.select:focus {
+	outline: none;
+	border-color: #8b5cf6;
+}
+.select-arrow {
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	font-size: 1.25rem;
+}
+
+/* Botões */
+.play-button {
+	width: 100%;
+	height: 64px;
+	font-size: 1.5rem;
+	font-weight: 800;
+	border-radius: 16px;
+	background: linear-gradient(90deg, #8b5cf6, #ec4899, #f97316);
+	color: white;
+	border: none;
+	cursor: pointer;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+	transition: all 0.2s;
+	margin-bottom: 16px;
+}
+.play-button:hover:not(:disabled) {
+	background: linear-gradient(90deg, #7c3aed, #db2777, #ea580c);
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+	transform: scale(1.05);
+}
+.play-button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	transform: none;
+}
+.about-button {
+	width: 100%;
+	height: 48px;
+	font-size: 1.125rem;
+	font-weight: 700;
+	border-radius: 16px;
+	border: 3px solid #93c5fd;
+	background: transparent;
+	color: #2563eb;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+.about-button:hover {
+	background: #dbeafe;
+	border-color: #60a5fa;
+}
+
+/* Estatísticas Divertidas */
+.fun-stats {
+	margin-top: 32px;
+	text-align: center;
+}
+.fun-stats p {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #4b5563;
+	margin-bottom: 8px;
+}
+.fun-stats .subtitle {
+	font-size: 0.875rem;
+	color: #6b7280;
+}
+
+/* Responsividade - Página Home */
+@media (min-width: 768px) {
+	.logo h1 { font-size: 6rem; }
+	.logo-subtitle { font-size: 2rem; }
+}
+@media (max-width: 480px) {
+	.logo h1 { font-size: 3rem; }
+	.logo-subtitle { font-size: 1.25rem; }
+	.game-controls { padding: 24px; }
+}
+
+/* ===== Página Sobre ===== */
+.container-sobre {
+	position: relative;
+	z-index: 10;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 32px 16px;
+	min-height: 100vh;
+}
+
+/* Cabeçalho */
+.header {
+	text-align: center;
+	margin-bottom: 48px;
+}
+.header h1 {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 3rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	margin-bottom: 16px;
+	background: linear-gradient(90deg, #9333ea, #ec4899, #f97316);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+.header-subtitle {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: #4b5563;
+	margin-bottom: 32px;
+}
+
+/* Cartões de Conteúdo */
+.content-card {
+	background: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(8px);
+	border-radius: 24px;
+	padding: 32px;
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+	border: 4px solid #e9d5ff;
+	margin-bottom: 32px;
+}
+.content-card h2 {
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: #374151;
+	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+.content-card p {
+	font-size: 1.125rem;
+	line-height: 1.6;
+	color: #4b5563;
+	margin-bottom: 16px;
+}
+.content-card ul {
+	list-style: none;
+	padding: 0;
+}
+.content-card li {
+	font-size: 1.125rem;
+	line-height: 1.6;
+	color: #4b5563;
+	margin-bottom: 12px;
+	padding-left: 24px;
+	position: relative;
+}
+.content-card li::before {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+/* Caixas de Destaque */
+.highlight-box {
+	background: linear-gradient(90deg, #faf5ff, #fdf2f8);
+	border: 3px solid #c4b5fd;
+	border-radius: 16px;
+	padding: 20px;
+	margin: 20px 0;
+}
+.highlight-box p {
+	margin-bottom: 0;
+	font-weight: 600;
+}
+
+/* Responsividade - Página Sobre */
+@media (min-width: 768px) {
+	.header h1 { font-size: 4rem; }
+}
+@media (max-width: 480px) {
+	.header h1 { font-size: 2.5rem; }
+	.content-card { padding: 24px; }
+}
+
+/* ===== Página Jogo ===== */
+.container-jogo1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 50px;
+	padding: 20px;
+	flex-wrap: wrap;
+}
+.container-jogo2 {
+	position: relative;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+/* Área do Tabuleiro */
+.jogo-area {
+	position: relative;
+	width: fit-content;
+	height: fit-content;
+}
+.linha-canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	z-index: 1;
+}
+.tabuleiro {
+	display: grid;
+	grid-template-columns: repeat(12, 30px);
+	gap: 2px;
+	position: relative;
+	z-index: 2;
+}
+.letra {
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #eee;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.letra.selecionada {
+	background-color: lightblue;
+	color: white;
+	border: 2px solid blue;
+}
+.letra.revelada {
+	background-color: lightcoral;
+	color: white;
+}
+
+/* Painel de Palavras */
+.painel-palavras {
+	min-width: 180px;
+}
+.painel-palavras ul {
+	list-style: none;
+	padding: 0;
+	font-size: 18px;
+	margin-top: 10px;
+}
+.painel-palavras li {
+	margin: 5px 0;
+}
+
+/* Botão Menu */
+.bt-menu {
+	display: block;
+}
